@@ -12,6 +12,10 @@ namespace SG
             public float mouseX;
             public float mouseY;
 
+            public bool b_Input;
+            public bool rollFlag;
+            public bool isInteracting;
+
             PlayerControls inputActions;
             CameraHandler cameraHandler;
 
@@ -27,7 +31,7 @@ namespace SG
             {
                 float delta = Time.fixedDeltaTime;
 
-                if ( cameraHandler != null)
+                if (cameraHandler != null)
                 {
                     cameraHandler.FollowTarget(delta);
                     cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
@@ -53,6 +57,7 @@ namespace SG
             public void TickInput(float delta)
             {
                 MoveInput(delta);
+                HandleRollInput(delta);
             }
 
             private void MoveInput(float delta)
@@ -65,7 +70,14 @@ namespace SG
             }
     
     
-    
+            private void HandleRollInput(float delta)
+            {
+                b_Input = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Performed;
+                if (b_Input)
+                {
+                    rollFlag = true;
+                }
+            }
     }
 
 }
