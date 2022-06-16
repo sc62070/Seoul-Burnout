@@ -16,7 +16,9 @@ namespace SG
         
         [Header("Player Flags")]
         public bool isSprinting;
-        
+        public bool isInAir;
+        public bool isGrounded;
+
         private void Awake()
         {
             cameraHandler = CameraHandler.singleton;
